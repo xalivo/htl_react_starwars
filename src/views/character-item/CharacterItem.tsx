@@ -9,16 +9,25 @@ interface CharacterItemProps {
 export const CharacterItem: React.FC<CharacterItemProps> = (props) => {
     const [character, setCharacter] = useState<Character>(props.character);
 
-    const handleForceSensitiveClick = () => {
-
-    }
+    const handleForceSensitivityClick = () => {
+        const updatedCharacter = {
+            ...character,
+            isForceSensitive: !character.isForceSensitive
+        }
+        setCharacter(updatedCharacter);
+    };
 
     return (
         <tr>
-            <td>{character.name}</td>
-            <td>{character.type}</td>
-            <td><img src={character.image_url} height={200}></img></td>
-            <td>{character.isForceSensitive ? <Star/> : <StarOutline/>}</td>
+            <td className={"text-center"}>{character.name}</td>
+            <td className={"text-center"}>{character.type}</td>
+            <td className={"text-center"}><img src={character.image_url} height={200}></img></td>
+            <td onClick={(e) => {
+                e.stopPropagation();
+                handleForceSensitivityClick();
+            }} className={"text-center"}>
+                {character.isForceSensitive ? <Star/> : <StarOutline/>}
+            </td>
         </tr>
     );
 };

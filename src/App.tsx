@@ -7,8 +7,10 @@ import {charactersMockData} from "./common/mockdata";
 
 function App() {
   const [characters, setCharacters] = useState<Character[]>(charactersMockData);
+
   return (
     <div className="app">
+      <CharacterOverview characters={characters}/>
       <CharacterOverview characters={characters}/>
     </div>
   );
